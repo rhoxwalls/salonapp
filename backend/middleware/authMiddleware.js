@@ -15,3 +15,10 @@ export const verifyToken = (req, res, next) => {
     return res.status(401).json({ error: "Token inválido o expirado" });
   }
 };
+
+export const isAdmin = (req,res, netx) =>{
+  if(req.user.role !== "admin"){
+    return res.status(403).json({error: "Acceso denegado. Solo Administrador"});
+  }
+  netx();
+};

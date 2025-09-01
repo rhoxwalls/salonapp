@@ -13,18 +13,19 @@ export const LoginComp=({ onLogin })=>{
         username,
         password,
       });
-
-      const { token } = res.data;
+        console.log(res.data)
+      const { token, role } = res.data;
 
       // guardar token en localStorage
       localStorage.setItem("token", token);
 
       // avisamos al padre que se logueó
-      onLogin(token);
+      onLogin({token, user:{username,role}});
 
       setError("");
     } catch (err) {
-      setError("Credenciales incorrectas"),err;
+      console.log(err)
+      setError("Credenciales incorrectas");
     }
   };
 

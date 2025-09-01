@@ -3,8 +3,9 @@ import { AuthProvider } from "./context/AuthContext";
 import { useAuth } from "./hooks/useAuth";
 import { Login } from "./pages/Login";
 import { WaiterDashboard } from "./pages/WaiterDashboard";
-import { AdminDashboard } from "./pages/AdminDashboard";
+
 import { NavBar } from "./components/NavBar";
+import { AdminDashboard } from "./pages/AdminDashboard";
 
 
 
@@ -23,10 +24,12 @@ function App(){
 <BrowserRouter>
 <NavBar />
     <Routes>
-        <Route path="/" element={<Login/>} />;
+        <Route path="/" element={<Login/>} />
 
-        <Route path="/mozo" element={<PrivateRoute role="mozo"><WaiterDashboard/></PrivateRoute>} />;   
-        <Route path="/admin" element={<PrivateRoute role="admin"><AdminDashboard/></PrivateRoute>} />;  
+        <Route path="/mozo" element={<PrivateRoute role="mozo"><WaiterDashboard/></PrivateRoute>} />
+
+        <Route path="/admin" element={<PrivateRoute role="admin"><AdminDashboard/></PrivateRoute>} />
+          
     </Routes>
 </BrowserRouter>
 </AuthProvider>
