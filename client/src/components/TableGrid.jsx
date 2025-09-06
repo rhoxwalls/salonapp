@@ -1,5 +1,6 @@
 import { useAuth } from "../hooks/useAuth";
 import { useState } from "react";
+import { TableModal } from "./TableComponents/TableModal";
 
 export const TableGrid = () => {
   const { user } = useAuth();
@@ -11,19 +12,25 @@ export const TableGrid = () => {
     }))
   );
 
+  const [selectedTable, setSelectedTable] = useState(null);
+
   const toggleMesa = (id) => {
-    setMesas(
-      mesas.map((mesa) =>
-        mesa.id === id
-          ? {
-              ...mesa,
-              ocupada: !mesa.ocupada,
-              mozo: !mesa.ocupada ? user.username : null,
-            }
-          : mesa
-      )
+  setMesas((prevMesas) => {
+    const updatedMesas = prevMesas.map((m) =>
+      m.id === id
+        ? {
+            ...m,
+            ocupada: !m.ocupada,
+            mozo: !m.ocupada ? user.username : null,
+          }
+        : m
     );
-  };
+
+    const selected = updatedMesas.find((m) => m.id === id);
+    setSelectedTable(selected);
+    return updatedMesas;
+  });
+};
 
   return (
     <div className="grid grid-cols-3 gap-4">
@@ -41,6 +48,12 @@ export const TableGrid = () => {
           </div>
         </div>
       ))}
+
+      {selectedTable && (
+        <TableModal mesa={selectedTable}
+        onClose={()=> setSelectedTable(null)}
+        />
+      )}
     </div>
   );
 }

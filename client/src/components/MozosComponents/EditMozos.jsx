@@ -22,7 +22,7 @@ export const EditMozo = ({ mozo, onClose, onUpdated }) => {
     try {
       await api.put(`/mozos/${mozo._id}`, formData);
       onUpdated(); // refresca lista
-      onClose();   // cierra el modal/form
+      onClose(); // cierra el modal/form
     } catch (err) {
       console.error(err);
       alert("Error al actualizar mozo");
@@ -83,4 +83,3 @@ export const EditMozo = ({ mozo, onClose, onUpdated }) => {
     </div>
   );
 };
-

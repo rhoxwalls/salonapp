@@ -6,6 +6,7 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import clientRoutes from "./routes/clientRoutes.js";
 import mozoRoutes from "./routes/mozoRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/clientes", clientRoutes);
 app.use("/api/mozos", mozoRoutes);
+app.use("/api/products", productRoutes);
 
 app.get("/", (req, res) => {
   res.send("server is working");

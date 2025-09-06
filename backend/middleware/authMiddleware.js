@@ -20,5 +20,11 @@ export const isAdmin = (req,res, netx) =>{
   if(req.user.role !== "admin"){
     return res.status(403).json({error: "Acceso denegado. Solo Administrador"});
   }
-  netx();
+  return  netx();
 };
+
+export const isMozo = (req, res, next)=>{
+  if (!req.user) return res.status(403).json({ error: "Acceso denegado" });
+  if (req.user.role !== "mozo") return res.status(403).json({ error: "Solo mozo" });
+  next();
+}
